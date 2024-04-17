@@ -60,12 +60,12 @@ class _MyHomePageState extends State<MyHomePage> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            label: 'Business',
+            icon: Icon(Icons.contacts),
+            label: 'Connections',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            label: 'School',
+            icon: Icon(Icons.person),
+            label: 'Profile',
           ),
         ],
         currentIndex: _selectedIndex,
