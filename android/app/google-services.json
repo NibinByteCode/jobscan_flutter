@@ -1,0 +1,83 @@
+{
+  "project_info": {
+    "project_number": "358871673337",
+    "firebase_url": "https://jobscanflutter-default-rtdb.firebaseio.com",
+    "project_id": "jobscanflutter",
+    "storage_bucket": "jobscanflutter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:358871673337:android:6b29a523dd74a479ce3528",
+        "android_client_info": {
+          "package_name": "com.example.jobscan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "358871673337-ku5ehvlgo6fnt9t7lnp4f4e7hcbmojd7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDxZc7X4zo66IZIJ_OpJlKuB_-tIBUaMqQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "358871673337-ku5ehvlgo6fnt9t7lnp4f4e7hcbmojd7.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "358871673337-ajf88qfvh011jnkd6mlu0l3ud8gatr0l.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.jobscanFlutter"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:358871673337:android:c1f21afc54bb9dc2ce3528",
+        "android_client_info": {
+          "package_name": "com.example.jobscan_flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "358871673337-ku5ehvlgo6fnt9t7lnp4f4e7hcbmojd7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDxZc7X4zo66IZIJ_OpJlKuB_-tIBUaMqQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "358871673337-ku5ehvlgo6fnt9t7lnp4f4e7hcbmojd7.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "358871673337-ajf88qfvh011jnkd6mlu0l3ud8gatr0l.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.jobscanFlutter"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
