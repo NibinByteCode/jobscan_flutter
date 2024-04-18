@@ -1,6 +1,8 @@
 import 'package:firebase_database/firebase_database.dart';
 
-import '../models/userdata.dart';
+import '../models/UserData.dart';
+
+
 
 class UserDataFetcher {
   final String userId;
