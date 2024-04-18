@@ -14,6 +14,7 @@ class UserData {
 
   Map<String, String> connections;
   List<String> postIds;
+  List<String> jobIds;
   int connectionCount;
 
   UserData({
@@ -30,6 +31,7 @@ class UserData {
     this.educationQualification = '',
     this.connections = const {},
     this.postIds = const [],
+    this.jobIds = const [],
     this.connectionCount = 0,
   });
 
@@ -47,6 +49,7 @@ class UserData {
         educationQualification = json['educationQualification'] ?? '',
         connections = Map<String, String>.from(json['connections'] ?? {}),
         postIds = List<String>.from(json['postIds'] ?? []),
+        jobIds = List<String>.from(json['jobIds'] ?? []),
         connectionCount = json['connectionCount'] ?? 0;
 
   Map<String, dynamic> toJson() {
@@ -64,6 +67,7 @@ class UserData {
       'educationQualification': educationQualification,
       'connections': connections,
       'postIds': postIds,
+      'jobIds': jobIds,
       'connectionCount': connectionCount,
     };
   }

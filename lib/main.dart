@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:jobscan/pages/candidate_page.dart';
-import 'package:jobscan/pages/candidate_profile.dart';
 import 'package:jobscan/pages/home_page.dart';
+import 'package:jobscan/pages/jobs_page.dart';
 import 'package:jobscan/pages/profile_page.dart';
+import 'package:jobscan/pages/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,12 +14,23 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
       title: 'Job scan',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const SplashScreen(),
+        '/home' : (context) => const MyHomePage(),
+        // '/signup': (context) => const SignUpPage(),
+        // '/login': (context) => LoginPage(),
+        // '/home': (context) => _checkAuthAndNavigate(HomePage(selectedIndex: _selectedIndex, onItemTapped: _onItemTapped)),
+        // '/profile': (context) => _checkAuthAndNavigate(ProfilePage(selectedIndex: _selectedIndex, onItemTapped: _onItemTapped)),
+        // '/candidate': (context) => _checkAuthAndNavigate(CandidatePage(selectedIndex: _selectedIndex, onItemTapped: _onItemTapped)),
+        // '/joblist': (context) => _checkAuthAndNavigate(JobListPage(selectedIndex: _selectedIndex, onItemTapped: _onItemTapped)),
+      }
     );
   }
 }
@@ -35,8 +47,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   static final List<Widget> _widgetOptions = <Widget>[
     const HomePage(),
-    const CandidatePage(),
-    // const CandidateProfilePage(),
+    // const JobsPage(),
+    CandidatePage(),
     const ProfilePage(),
   ];
 
@@ -56,11 +68,15 @@ class _MyHomePageState extends State<MyHomePage> {
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
           ),
+          // BottomNavigationBarItem(
+          //   icon: Icon(Icons.work),
+          //   label: 'Jobs',
+          // ),
           BottomNavigationBarItem(
             icon: Icon(Icons.contacts),
             label: 'Connections',
