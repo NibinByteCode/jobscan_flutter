@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jobscan/pages/candidate_page.dart';
+import 'package:jobscan/pages/candidate_profile.dart';
 import 'package:jobscan/pages/home_page.dart';
 import 'package:jobscan/pages/profile_page.dart';
 
@@ -35,6 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
   static final List<Widget> _widgetOptions = <Widget>[
     const HomePage(),
     const CandidatePage(),
+    // const CandidateProfilePage(),
     const ProfilePage(),
   ];
 
