@@ -16,6 +16,8 @@ class JobsPage extends StatelessWidget {
         jobPostingDate: '2024-04-18',
         jobImage: 'images/hiring.jpg',
         userId: '123',
+        jobSalary: '6000',
+        jobExperience: '3 years',
       ),
       JobData(
         jobId: '2',
@@ -24,6 +26,8 @@ class JobsPage extends StatelessWidget {
         jobPostingDate: '2024-04-19',
         jobImage: 'images/hiring.jpg',
         userId: '456',
+        jobSalary: '8000',
+        jobExperience: '5 years',
       ),
     ];
 
@@ -69,6 +73,15 @@ class JobsPage extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 8),
+                        Text(
+                          'Experience: ${job.jobExperience}',
+                          style: const TextStyle(fontSize: 16),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          'Salary: ${job.jobSalary}',
+                          style: const TextStyle(fontSize: 16),
+                        ),
                       ],
                     ),
                   ),

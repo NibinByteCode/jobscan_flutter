@@ -5,6 +5,8 @@ class JobData {
   String jobPostingDate;
   String? jobImage;
   String userId;
+  String jobSalary;
+  String jobExperience;
 
   JobData({
     this.jobId = '',
@@ -13,6 +15,8 @@ class JobData {
     this.jobPostingDate = '',
     this.jobImage,
     required this.userId,
+    required this.jobSalary,
+    required this.jobExperience,
   });
 
   Map<String, dynamic> toMap() {
@@ -23,6 +27,8 @@ class JobData {
       'jobPostingDate': jobPostingDate,
       'jobImage': jobImage,
       'userId': userId,
+      'jobSalary': jobSalary,
+      'experience': jobExperience,
     };
   }
 
@@ -32,7 +38,9 @@ class JobData {
         jobDescription = json['jobDescription'] ?? '',
         jobPostingDate = json['jobPostingDate'] ?? '',
         jobImage = json['jobImage'],
-        userId = json['userId'] ?? '';
+        userId = json['userId'] ?? '',
+        jobSalary = json['jobSalary'] ?? '',
+        jobExperience = json['jobExperience'] ?? '';
 
   Map<String, dynamic> toJson() {
     return {
@@ -42,6 +50,8 @@ class JobData {
       'jobPostingDate': jobPostingDate,
       'jobImage': jobImage,
       'userId': userId,
+      'jobSalary': jobSalary,
+      'jobExperience': jobExperience,
     };
   }
 }

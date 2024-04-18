@@ -42,6 +42,26 @@ class JobDetailsPage extends StatelessWidget {
               style: TextStyle(fontSize: 18),
             ),
             SizedBox(height: 10),
+            Text(
+              'Salary:',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 5),
+            Text(
+              jobData.jobSalary,
+              style: TextStyle(fontSize: 18),
+            ),
+            SizedBox(height: 10),
+            Text(
+              'Experience:',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 5),
+            Text(
+              jobData.jobExperience,
+              style: TextStyle(fontSize: 18),
+            ),
+            SizedBox(height: 20),
             if (jobData.jobImage != null)
               Image.asset(
                 jobData.jobImage!,

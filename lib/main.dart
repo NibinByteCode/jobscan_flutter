@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:jobscan/pages/candidate_page.dart';
 import 'package:jobscan/pages/home_page.dart';
 import 'package:jobscan/pages/jobs_page.dart';
+import 'package:jobscan/pages/post_page.dart';
 import 'package:jobscan/pages/profile_page.dart';
 import 'package:jobscan/pages/splash_screen.dart';
 
@@ -47,9 +48,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   static final List<Widget> _widgetOptions = <Widget>[
     const HomePage(),
-    // const JobsPage(),
+    const JobsPage(),
     CandidatePage(),
-    const ProfilePage(),
+    // const ProfilePage(),
+    PostPage()
   ];
 
   void _onItemTapped(int index) {
@@ -73,10 +75,10 @@ class _MyHomePageState extends State<MyHomePage> {
             icon: Icon(Icons.home),
             label: 'Home',
           ),
-          // BottomNavigationBarItem(
-          //   icon: Icon(Icons.work),
-          //   label: 'Jobs',
-          // ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.work),
+            label: 'Jobs',
+          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.contacts),
             label: 'Connections',
