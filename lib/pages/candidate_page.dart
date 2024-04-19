@@ -98,12 +98,12 @@ class CandidatePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Candidate Page'),
+        title: const Text('Candidate Page'),
       ),
       body: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
+          const Padding(
+            padding: EdgeInsets.all(8.0),
             child: SearchView(),
           ),
           Expanded(
@@ -147,7 +147,7 @@ class SearchView extends StatelessWidget {
       child: TextField(
         decoration: InputDecoration(
           hintText: 'Search Candidates',
-          prefixIcon: Icon(Icons.search),
+          prefixIcon: const Icon(Icons.search),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),

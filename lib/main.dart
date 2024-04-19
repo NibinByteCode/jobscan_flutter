@@ -2,11 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:jobscan/pages/candidate_page.dart';
 import 'package:jobscan/pages/home_page.dart';
 import 'package:jobscan/pages/jobs_page.dart';
-import 'package:jobscan/pages/post_page.dart';
+import 'package:jobscan/pages/login.dart';
 import 'package:jobscan/pages/profile_page.dart';
+import 'package:jobscan/pages/signup.dart';
 import 'package:jobscan/pages/splash_screen.dart';
-
-void main() {
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
@@ -21,12 +27,13 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+        debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
         '/': (context) => const SplashScreen(),
         '/home' : (context) => const MyHomePage(),
-        // '/signup': (context) => const SignUpPage(),
-        // '/login': (context) => LoginPage(),
+         '/signup': (context) => const SignUpPage(),
+         '/login': (context) => LoginPage(),
         // '/home': (context) => _checkAuthAndNavigate(HomePage(selectedIndex: _selectedIndex, onItemTapped: _onItemTapped)),
         // '/profile': (context) => _checkAuthAndNavigate(ProfilePage(selectedIndex: _selectedIndex, onItemTapped: _onItemTapped)),
         // '/candidate': (context) => _checkAuthAndNavigate(CandidatePage(selectedIndex: _selectedIndex, onItemTapped: _onItemTapped)),
@@ -50,8 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
     const HomePage(),
     const JobsPage(),
     CandidatePage(),
-    // const ProfilePage(),
-    PostPage()
+    const ProfilePage(),
   ];
 
   void _onItemTapped(int index) {
@@ -70,21 +76,21 @@ class _MyHomePageState extends State<MyHomePage> {
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: <BottomNavigationBarItem>[
+        items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(Icons.home,color: Colors.blue,),
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.work),
+            icon: Icon(Icons.work,color: Colors.blue,),
             label: 'Jobs',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.contacts),
+            icon: Icon(Icons.contacts,color: Colors.blue,),
             label: 'Connections',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
+            icon: Icon(Icons.person,color: Colors.blue,),
             label: 'Profile',
           ),
         ],
