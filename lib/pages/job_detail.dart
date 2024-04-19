@@ -12,71 +12,75 @@ class JobDetailsPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Job Details'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              jobData.jobTitle,
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 10),
-            Text(
-              'Job Description:',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 5),
-            Text(
-              jobData.jobDescription,
-              style: TextStyle(fontSize: 18),
-            ),
-            SizedBox(height: 10),
-            Text(
-              'Job Posting Date:',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 5),
-            Text(
-              jobData.jobPostingDate,
-              style: TextStyle(fontSize: 18),
-            ),
-            SizedBox(height: 10),
-            Text(
-              'Salary:',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 5),
-            Text(
-              jobData.jobSalary,
-              style: TextStyle(fontSize: 18),
-            ),
-            SizedBox(height: 10),
-            Text(
-              'Experience:',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 5),
-            Text(
-              jobData.jobExperience,
-              style: TextStyle(fontSize: 18),
-            ),
-            SizedBox(height: 20),
-            if (jobData.jobImage != null)
-              Image.asset(
-                jobData.jobImage!,
-                width: 300,
-                height: 300,
-                fit: BoxFit.cover,
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                jobData.jobTitle,
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                // Add your action when the user applies for the job
-              },
-              child: Text('Apply Now'),
-            ),
-          ],
+              SizedBox(height: 10),
+              Text(
+                'Job Description:',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 5),
+              Text(
+                jobData.jobDescription,
+                style: TextStyle(fontSize: 18),
+              ),
+              SizedBox(height: 10),
+              Text(
+                'Job Posting Date:',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 5),
+              Text(
+                jobData.jobPostingDate,
+                style: TextStyle(fontSize: 18),
+              ),
+              SizedBox(height: 10),
+              Text(
+                'Salary:',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 5),
+              Text(
+                jobData.jobSalary,
+                style: TextStyle(fontSize: 18),
+              ),
+              SizedBox(height: 10),
+              Text(
+                'Experience:',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 5),
+              Text(
+                jobData.jobExperience,
+                style: TextStyle(fontSize: 18),
+              ),
+              SizedBox(height: 20),
+              if (jobData.jobImage != null)
+                Container(
+                  width: 300,
+                  height: 300,
+                  child: Image.asset(
+                    jobData.jobImage!,
+                    fit: BoxFit.contain, // Try different fit options
+                  ),
+                ),
+              SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  // Add your action when the user applies for the job
+                },
+                child: Text('Apply Now'),
+              ),
+            ],
+          ),
         ),
       ),
     );
