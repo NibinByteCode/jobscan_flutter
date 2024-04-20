@@ -53,23 +53,31 @@ class CandidateProfilePage extends StatelessWidget {
   }
 
   Widget _buildUserInfoRow(String label, String value) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20.0),
-      child: Row(
-        children: [
-          Text(
-            label,
-            style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-          ),
-          SizedBox(width: 10.0),
-          Expanded(
-            child: Text(
-              value,
-              style: TextStyle(fontSize: 18.0),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.only(left: 30.0),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                label,
+                style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+              ),
             ),
           ),
-        ],
-      ),
+        ),
+        Expanded(
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              value,
+              style: const TextStyle(fontSize: 18.0),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

@@ -5,6 +5,8 @@ class JobData {
   String jobPostingDate;
   String? jobImage;
   String userId;
+  String jobSalary; // Added jobSalary attribute
+  String jobExperience; // Added jobExperience attribute
 
   JobData({
     this.jobId = '',
@@ -13,6 +15,8 @@ class JobData {
     this.jobPostingDate = '',
     this.jobImage,
     required this.userId,
+    required this.jobSalary, // Added jobSalary to constructor
+    required this.jobExperience, // Added jobExperience to constructor
   });
 
   Map<String, dynamic> toMap() {
@@ -23,16 +27,23 @@ class JobData {
       'jobPostingDate': jobPostingDate,
       'jobImage': jobImage,
       'userId': userId,
+      'jobSalary': jobSalary, // Included jobSalary in the map
+      'jobExperience': jobExperience, // Included jobExperience in the map
     };
   }
 
-  JobData.fromJson(Map<String, dynamic> json)
-      : jobId = json['jobId'] ?? '',
-        jobTitle = json['jobTitle'] ?? '',
-        jobDescription = json['jobDescription'] ?? '',
-        jobPostingDate = json['jobPostingDate'] ?? '',
-        jobImage = json['jobImage'],
-        userId = json['userId'] ?? '';
+  factory JobData.fromJson(Map<dynamic, dynamic> json){
+    return JobData(
+      jobId : json['jobId'] ?? '',
+      jobTitle : json['jobTitle'] ?? '',
+      jobDescription : json['jobDescription'] ?? '',
+      jobPostingDate : json['jobPostingDate'] ?? '',
+      jobImage : json['jobImage'],
+      userId : json['userId'] ?? '',
+      jobSalary : json['jobSalary'] ?? '', // Parse jobSalary from JSON
+      jobExperience : json['jobExperience'] ?? '', // Parse jobExperience from JSON
+    );
+  }
 
   Map<String, dynamic> toJson() {
     return {
@@ -42,6 +53,8 @@ class JobData {
       'jobPostingDate': jobPostingDate,
       'jobImage': jobImage,
       'userId': userId,
+      'jobSalary': jobSalary,
+      'jobExperience': jobExperience,
     };
   }
 }
