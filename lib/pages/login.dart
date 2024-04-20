@@ -79,7 +79,7 @@ class LoginPage extends StatelessWidget {
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(20)),
                         ),
-                        labelText: 'eMail Id',
+                        labelText: 'Email',
                         prefixIcon: Icon(
                           Icons.email,
                           color: Colors.black,

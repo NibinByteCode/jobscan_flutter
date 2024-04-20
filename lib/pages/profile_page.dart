@@ -57,9 +57,11 @@ class _ProfilePageState extends State<ProfilePage> {
                     child: SizedBox(
                       width: 150.0,
                       height: 100.0,
-                      child: Image.network(userData?.profileImage??'images/logo_user.png'),
+                      child: userData?.profileImage?.isNotEmpty == true
+                          ? Image.network(userData!.profileImage!)
+                          : Image.asset('images/logo_user.png'),
+                      ),
                     ),
-                  ),
                   Text(
                     '${userData?.firstName} ${userData?.lastName}',
                     style: const TextStyle(fontSize: 20.0),

@@ -1,7 +1,6 @@
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
-
+import 'package:flutter/material.dart';
 
 
 class AuthHelper {
@@ -20,6 +19,7 @@ class AuthHelper {
       return null;
     }
   }
+
   Future<String?> getCurrentUserId() async {
     FirebaseAuth auth = FirebaseAuth.instance;
     User? user = auth.currentUser;
@@ -29,6 +29,7 @@ class AuthHelper {
       return null;
     }
   }
+
   Future<void> signUp({
     required String firstName,
     required String lastName,
@@ -41,7 +42,10 @@ class AuthHelper {
     required String designation,
     required String educationQualification,
     required String userType,
+    required String profileImage,
+    required int connectionCount,
     required Function(String) onError,
+    required VoidCallback onSuccess, // Added onSuccess callback
   }) async {
     if (password != confirmPassword) {
       onError('Passwords do not match');
@@ -66,8 +70,11 @@ class AuthHelper {
           'designation': designation,
           'educationQualification': educationQualification,
           'userId': user.uid,
+          'profileImage': profileImage,
+          'connectionCount': connectionCount
         };
         await _database.child('Users').child(user.uid).set(userData);
+        onSuccess(); // Call onSuccess callback on successful signup
       } else {
         onError('Failed to register user');
       }
@@ -75,6 +82,7 @@ class AuthHelper {
       onError('Failed to register: $e');
     }
   }
+
   Future<void> signOut() async {
     try {
       await _auth.signOut();
@@ -82,5 +90,4 @@ class AuthHelper {
       print('Error signing out: $e');
     }
   }
-
 }
