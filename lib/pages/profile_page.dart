@@ -57,7 +57,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     child: SizedBox(
                       width: 150.0,
                       height: 100.0,
-                      child: Image.asset('images/logo_user.png'),
+                      child: Image.network(userData?.profileImage??'images/logo_user.png'),
                     ),
                   ),
                   Text(
@@ -107,7 +107,7 @@ class _ProfilePageState extends State<ProfilePage> {
               alignment: Alignment.centerLeft,
               child: Text(
                 title,
-                style: const TextStyle(fontSize: 18.0),
+                style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
               ),
             ),
           ),

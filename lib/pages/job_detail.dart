@@ -1,87 +1,86 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:jobscan/models/JobData.dart';
 
-class JobDetailsPage extends StatefulWidget {
+class JobDetailsPage extends StatelessWidget {
   final JobData jobData;
 
   const JobDetailsPage({Key? key, required this.jobData}) : super(key: key);
 
   @override
-  _JobDetailsPageState createState() => _JobDetailsPageState();
-}
-
-class _JobDetailsPageState extends State<JobDetailsPage> {
-  String? imageUrl;
-
-  @override
-  void initState() {
-    super.initState();
-    fetchImage();
-  }
-
-  Future<void> fetchImage() async {
-    if (widget.jobData.jobImage != null) {
-      firebase_storage.Reference ref = firebase_storage.FirebaseStorage.instance.ref(widget.jobData.jobImage!);
-      String downloadUrl = await ref.getDownloadURL();
-      setState(() {
-        print(downloadUrl);
-        imageUrl = downloadUrl;
-      });
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Job Details'),
+        title: Text('Job Details'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              widget.jobData.jobTitle,
-              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+      body: SingleChildScrollView(
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Hero(
+                  tag: 'job${jobData.jobId}', // Use the same tag as in JobsPage
+                  child: Image.network(
+                    jobData.jobImage ?? '', // Use job image if available
+                    fit: BoxFit.contain, // Try different fit options
+                  ),
+                ),
+                SizedBox(height: 20),
+                Text(
+                  jobData.jobTitle,
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 10),
+                Text(
+                  'Job Description:',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 5),
+                Text(
+                  jobData.jobDescription,
+                  style: TextStyle(fontSize: 18),
+                ),
+                SizedBox(height: 10),
+                Text(
+                  'Job Posting Date:',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 5),
+                Text(
+                  jobData.jobPostingDate,
+                  style: TextStyle(fontSize: 18),
+                ),
+                SizedBox(height: 10),
+                Text(
+                  'Salary:',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 5),
+                Text(
+                  jobData.jobSalary,
+                  style: TextStyle(fontSize: 18),
+                ),
+                SizedBox(height: 10),
+                Text(
+                  'Experience:',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 5),
+                Text(
+                  jobData.jobExperience,
+                  style: TextStyle(fontSize: 18),
+                ),
+                SizedBox(height: 10),
+                ElevatedButton(
+                  onPressed: () {
+                    // Add your action when the user applies for the job
+                  },
+                  child: Text('Apply Now'),
+                ),
+              ],
             ),
-            const SizedBox(height: 10),
-            const Text(
-              'Job Description:',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 5),
-            Text(
-              widget.jobData.jobDescription,
-              style: const TextStyle(fontSize: 18),
-            ),
-            const SizedBox(height: 10),
-            const Text(
-              'Job Posting Date:',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 5),
-            Text(
-              widget.jobData.jobPostingDate,
-              style: const TextStyle(fontSize: 18),
-            ),
-            const SizedBox(height: 10),
-
-              Image.network(
-                widget.jobData.jobImage!,
-                width: 300,
-                height: 300,
-                fit: BoxFit.cover,
-              ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                // Add your action when the user applies for the job
-              },
-              child: Text('Apply Now'),
-            ),
-          ],
+          ),
         ),
       ),
     );

@@ -55,6 +55,8 @@ class JobsPage extends StatelessWidget {
                             ),
                           );
                         },
+                      child: Hero(
+                      tag: 'job${job.jobId}',
                         child: Card(
                           margin: const EdgeInsets.all(8.0),
                           child: Column(
@@ -62,7 +64,7 @@ class JobsPage extends StatelessWidget {
                             children: [
                               ListTile(
                                 leading: CircleAvatar(
-                                  backgroundImage: NetworkImage(userData?.profileImage ?? ''),
+                                  backgroundImage: NetworkImage(userData?.profileImage ?? '/images/logo_user.png'),
                                 ),
                                 title: Text('${userData?.firstName} ${userData?.lastName}'),
                                 subtitle: Text(job.jobPostingDate),
@@ -93,6 +95,7 @@ class JobsPage extends StatelessWidget {
                             ],
                           ),
                         ),
+                      ),
                       );
                     },
                   );
@@ -113,7 +116,7 @@ class JobsPage extends StatelessWidget {
 
     for (JobData job in jobList) {
       if (!userDataMap.containsKey(job.userId)) {
-     UserDataFetcher userDataFetcher=UserDataFetcher(userId: job.userId);
+        UserDataFetcher userDataFetcher=UserDataFetcher(userId: job.userId);
         UserData? userData = await userDataFetcher.fetchUserData();
         if (userData != null) {
           userDataMap[job.userId] = userData;
