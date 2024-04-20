@@ -123,19 +123,19 @@ class _PostPageState extends State<PostPage> {
                 ),
               SizedBox(height: 20.0),
               ElevatedButton(
+                onPressed: _handleImageUpload,
+                child: Text('Upload Image'),
+              ),
+              SizedBox(height: 20.0),
+              if (_uploadedImagePath != null)
+                Image.asset(_uploadedImagePath!),
+              ElevatedButton(
                 onPressed: () {
                   // Handle post button press
                 },
                 child: Text('Post'),
               ),
               SizedBox(height: 20.0),
-              ElevatedButton(
-                onPressed: _handleImageUpload,
-                child: Text('Upload Image'),
-              ),
-              SizedBox(height: 20.0),
-              if (_uploadedImagePath != null)
-                Image.asset(_uploadedImagePath!) // Display uploaded image
             ],
           ),
         ),
