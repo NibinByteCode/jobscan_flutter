@@ -3,6 +3,7 @@ import 'package:jobscan/pages/candidate_page.dart';
 import 'package:jobscan/pages/home_page.dart';
 import 'package:jobscan/pages/jobs_page.dart';
 import 'package:jobscan/pages/login.dart';
+import 'package:jobscan/pages/post_page.dart';
 import 'package:jobscan/pages/profile_page.dart';
 import 'package:jobscan/pages/signup.dart';
 import 'package:jobscan/pages/splash_screen.dart';
@@ -56,6 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
   static final List<Widget> _widgetOptions = <Widget>[
     const HomePage(),
     const JobsPage(),
+    PostPage(),
     CandidatePage(),
     const ProfilePage(),
   ];
@@ -84,6 +86,10 @@ class _MyHomePageState extends State<MyHomePage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.work,color: Colors.blue,),
             label: 'Jobs',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.edit,color: Colors.blue,),
+            label: 'Create',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.contacts,color: Colors.blue,),
