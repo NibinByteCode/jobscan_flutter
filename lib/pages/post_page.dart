@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 class PostPage extends StatefulWidget {
   @override
@@ -12,9 +14,70 @@ class _PostPageState extends State<PostPage> {
   String _jobDescription = '';
   String _experience = '';
   String? _uploadedImagePath;
+  String? _postContent; // Define _postContent variable
 
-  void _handleImageUpload() {
-    // Implement image upload logic
+  void _handlePost(BuildContext context) async {
+    // Get the current user
+    User? user = FirebaseAuth.instance.currentUser;
+
+    if (user != null) {
+      String userId = user.uid;
+
+      DatabaseReference dbRef;
+
+      if (_selectedOption == 1) {
+        // Assign _postContent based on selected option
+        _postContent = _selectedOption == 1 ? _postContent : null;
+
+        // Format date as "dd-mm-yyyy"
+        String postDate = '${DateTime.now().day.toString().padLeft(2, '0')}-${DateTime.now().month.toString().padLeft(2, '0')}-${DateTime.now().year}';
+
+        // Create a general post
+        dbRef = FirebaseDatabase.instance.reference().child('Posts').push();
+        await dbRef.set({
+          'postId': dbRef.key.toString(),
+          'postContent': _postContent ?? '',
+          'userId': userId,
+          'postDate': postDate,
+        });
+      } else if (_selectedOption == 2) {
+        // Format date as "dd-mm-yyyy"
+        String jobPostingDate = '${DateTime.now().day.toString().padLeft(2, '0')}-${DateTime.now().month.toString().padLeft(2, '0')}-${DateTime.now().year}';
+
+        // Set fixed image link for job posts
+        String jobImageLink = 'https://firebasestorage.googleapis.com/v0/b/jobscanflutter.appspot.com/o/jobImages%2Fhiring.jpg?alt=media&token=ef3d9405-65f0-4363-8438-e548c8c1c5c8';
+
+        // Create a job post
+        dbRef = FirebaseDatabase.instance.reference().child('Jobs').push();
+        await dbRef.set({
+          'jobId': dbRef.key.toString(),
+          'jobTitle': _jobTitle,
+          'jobDescription': _jobDescription,
+          'jobPostingDate': jobPostingDate,
+          'jobImage': jobImageLink,
+          'userId': userId,
+          'jobSalary': _salary,
+          'jobExperience': _experience,
+        });
+      }
+
+      // Reset fields after posting
+      setState(() {
+        _postContent = '';
+        _jobTitle = '';
+        _salary = '';
+        _jobDescription = '';
+        _experience = '';
+        _uploadedImagePath = null;
+      });
+
+      // Navigate to home page
+      _navigateToHome();
+    }
+  }
+
+  void _navigateToHome() {
+    Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
   }
 
   @override
@@ -57,13 +120,18 @@ class _PostPageState extends State<PostPage> {
               ),
               const SizedBox(height: 20.0),
               if (_selectedOption == 1) // General Post
-                const TextField(
-                  decoration: InputDecoration(
+                TextField(
+                  decoration: const InputDecoration(
                     hintText: 'Enter your post content here',
                     border: OutlineInputBorder(),
                   ),
                   minLines: 5,
                   maxLines: null,
+                  onChanged: (value) {
+                    setState(() {
+                      _postContent = value;
+                    });
+                  },
                 ),
               if (_selectedOption == 2) // Job Post
                 Column(
@@ -123,15 +191,8 @@ class _PostPageState extends State<PostPage> {
                 ),
               const SizedBox(height: 20.0),
               ElevatedButton(
-                onPressed: _handleImageUpload,
-                child: const Text('Upload Image'),
-              ),
-              const SizedBox(height: 20.0),
-              if (_uploadedImagePath != null)
-                Image.asset(_uploadedImagePath!),
-              ElevatedButton(
                 onPressed: () {
-                  // Handle post button press
+                  _handlePost(context); // Pass context to handlePost
                 },
                 child: const Text('Post'),
               ),

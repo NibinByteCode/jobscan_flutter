@@ -19,7 +19,7 @@ class PostDataFetcher {
         if (connectionsMap != null) {
           // Extract the userIds from connections
           List<String> userIds = connectionsMap.keys.cast<String>().toList();
-
+          userIds.add(user.uid);
           // Fetch posts for the userIds in connections
           List<PostData> postList = [];
 
