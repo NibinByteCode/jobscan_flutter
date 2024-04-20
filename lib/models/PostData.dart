@@ -3,14 +3,14 @@ class PostData {
   String postContent;
   String? postImage;
   String userId;
-  int postDate;
+  String postDate;
 
   PostData({
     this.postId = '',
     this.postContent = '',
     this.postImage,
     this.userId = '',
-    this.postDate = 0,
+    this.postDate = '',
   });
 
   Map<String, dynamic> toMap() {
@@ -28,7 +28,7 @@ class PostData {
         postContent : json['postContent'] ?? '',
         postImage : json['postImage'],
         userId : json['userId'] ?? '',
-        postDate : json['postDate'] ?? 0);
+        postDate : json['postDate'] ?? '');
 }
   Map<String, dynamic> toJson() {
     return {
