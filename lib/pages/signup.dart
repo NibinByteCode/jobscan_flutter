@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../helperclass/authhelper.dart';
 
-
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
 
@@ -23,10 +22,10 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController _qualificationController = TextEditingController();
 
   final String _userType = 'candidate'; // Default user type
+  final String _defaultProfileImage = ''; // Default profile image as empty string
+  final int _connectionCount = 0 ;
 
-  bool _agreedToTerms = false;
-
-  void _signUp() {
+  void _signUp() async {
     final firstName = _firstNameController.text.trim();
     final lastName = _lastNameController.text.trim();
     final email = _emailController.text.trim();
@@ -50,13 +49,20 @@ class _SignUpPageState extends State<SignUpPage> {
       designation: designation,
       educationQualification: educationQualification,
       userType: _userType,
+      profileImage: _defaultProfileImage,
+      connectionCount: _connectionCount,
       onError: (error) {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text(error),
         ));
       },
+      onSuccess: () {
+        // Navigate to login page after successful signup
+        Navigator.pushReplacementNamed(context, '/login');
+      },
     );
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -118,19 +124,6 @@ class _SignUpPageState extends State<SignUpPage> {
                 controller: _qualificationController,
                 decoration: const InputDecoration(labelText: 'Qualification'),
               ),
-              Row(
-                children: [
-                  Checkbox(
-                    value: _agreedToTerms,
-                    onChanged: (value) {
-                      setState(() {
-                        _agreedToTerms = value!;
-                      });
-                    },
-                  ),
-                  const Text('Agree to terms'),
-                ],
-              ),
               ElevatedButton(
                 onPressed: _signUp,
                 child: const Text('Sign Up'),
@@ -148,4 +141,3 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 }
-
