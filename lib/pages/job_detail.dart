@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:jobscan/models/JobData.dart';
+import '../helperclass/applyForJob.dart';
 
 class JobDetailsPage extends StatelessWidget {
   final JobData jobData;
@@ -10,7 +13,7 @@ class JobDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Job Details'),
+        title: const Text('Job Details'),
       ),
       body: SingleChildScrollView(
         child: Center(
@@ -20,63 +23,73 @@ class JobDetailsPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Hero(
-                  tag: 'job${jobData.jobId}', // Use the same tag as in JobsPage
+                  tag: 'job${jobData.jobId}',
                   child: Image.network(
-                    jobData.jobImage ?? '', // Use job image if available
-                    fit: BoxFit.contain, // Try different fit options
+                    jobData.jobImage ?? '',
+                    fit: BoxFit.contain,
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Text(
                   jobData.jobTitle,
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 10),
-                Text(
+                const SizedBox(height: 10),
+                const Text(
                   'Job Description:',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 5),
+                const SizedBox(height: 5),
                 Text(
                   jobData.jobDescription,
-                  style: TextStyle(fontSize: 18),
+                  style: const TextStyle(fontSize: 18),
                 ),
-                SizedBox(height: 10),
-                Text(
+                const SizedBox(height: 10),
+                const Text(
                   'Job Posting Date:',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 5),
+                const SizedBox(height: 5),
                 Text(
                   jobData.jobPostingDate,
-                  style: TextStyle(fontSize: 18),
+                  style: const TextStyle(fontSize: 18),
                 ),
-                SizedBox(height: 10),
-                Text(
+                const SizedBox(height: 10),
+                const Text(
                   'Salary:',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 5),
+                const SizedBox(height: 5),
                 Text(
                   jobData.jobSalary,
-                  style: TextStyle(fontSize: 18),
+                  style: const TextStyle(fontSize: 18),
                 ),
-                SizedBox(height: 10),
-                Text(
+                const SizedBox(height: 10),
+                const Text(
                   'Experience:',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 5),
+                const SizedBox(height: 5),
                 Text(
                   jobData.jobExperience,
-                  style: TextStyle(fontSize: 18),
+                  style: const TextStyle(fontSize: 18),
                 ),
-                SizedBox(height: 10),
-                ElevatedButton(
-                  onPressed: () {
-                    // Add your action when the user applies for the job
+                const SizedBox(height: 10),
+                FutureBuilder<bool>(
+                  future: _isJobApplied(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const CircularProgressIndicator();
+                    } else if (snapshot.hasError) {
+                      return Text('Error: ${snapshot.error}');
+                    } else {
+                      final bool isApplied = snapshot.data ?? false;
+                      return ElevatedButton(
+                        onPressed: isApplied ? null : () => _applyForJob(context, jobData.jobId),
+                        child: Text(isApplied ? 'Applied' : 'Apply Now'),
+                      );
+                    }
                   },
-                  child: Text('Apply Now'),
                 ),
               ],
             ),
@@ -85,4 +98,38 @@ class JobDetailsPage extends StatelessWidget {
       ),
     );
   }
+
+  Future<bool> _isJobApplied() async {
+    try {
+      final currentUser = FirebaseAuth.instance.currentUser;
+      if (currentUser != null) {
+        final  event = await FirebaseDatabase.instance.reference()
+            .child('Users')
+            .child(currentUser.uid)
+            .child('Jobs')
+            .orderByValue()
+            .equalTo(jobData.jobId)
+            .once();
+        return event.snapshot.value != null;
+      }
+      return false;
+    } catch (e) {
+      print('Error checking if job is applied: $e');
+      return false;
+    }
+  }
+
+  void _applyForJob(BuildContext context, String jobId) {
+    final applyForJob = ApplyForJob();
+    applyForJob.applyForJob(jobId);
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Applied for job successfully!'),
+      ),
+    );
+
+    // Navigate to the home page after applying for the job
+    Navigator.of(context).popUntil((route) => route.isFirst);
+  }
+
 }

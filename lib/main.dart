@@ -58,7 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
     const HomePage(),
     const JobsPage(),
     PostPage(),
-    CandidatePage(),
+    const CandidatePage(),
     const ProfilePage(),
   ];
 
