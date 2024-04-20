@@ -26,13 +26,15 @@ class JobData {
     };
   }
 
-  JobData.fromJson(Map<String, dynamic> json)
-      : jobId = json['jobId'] ?? '',
-        jobTitle = json['jobTitle'] ?? '',
-        jobDescription = json['jobDescription'] ?? '',
-        jobPostingDate = json['jobPostingDate'] ?? '',
-        jobImage = json['jobImage'],
-        userId = json['userId'] ?? '';
+  factory JobData.fromJson(Map<dynamic, dynamic> json){
+    return JobData(
+    jobId : json['jobId'] ?? '',
+    jobTitle : json['jobTitle'] ?? '',
+    jobDescription : json['jobDescription'] ?? '',
+    jobPostingDate : json['jobPostingDate'] ?? '',
+    jobImage : json['jobImage'],
+    userId : json['userId'] ?? '');
+    }
 
   Map<String, dynamic> toJson() {
     return {

@@ -1,16 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:jobscan/models/JobData.dart';
 
-class JobDetailsPage extends StatelessWidget {
+class JobDetailsPage extends StatefulWidget {
   final JobData jobData;
 
   const JobDetailsPage({Key? key, required this.jobData}) : super(key: key);
 
   @override
+  _JobDetailsPageState createState() => _JobDetailsPageState();
+}
+
+class _JobDetailsPageState extends State<JobDetailsPage> {
+  String? imageUrl;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchImage();
+  }
+
+  Future<void> fetchImage() async {
+    if (widget.jobData.jobImage != null) {
+      firebase_storage.Reference ref = firebase_storage.FirebaseStorage.instance.ref(widget.jobData.jobImage!);
+      String downloadUrl = await ref.getDownloadURL();
+      setState(() {
+        print(downloadUrl);
+        imageUrl = downloadUrl;
+      });
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Job Details'),
+        title: const Text('Job Details'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -18,38 +43,38 @@ class JobDetailsPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              jobData.jobTitle,
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              widget.jobData.jobTitle,
+              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 10),
-            Text(
+            const SizedBox(height: 10),
+            const Text(
               'Job Description:',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 5),
+            const SizedBox(height: 5),
             Text(
-              jobData.jobDescription,
-              style: TextStyle(fontSize: 18),
+              widget.jobData.jobDescription,
+              style: const TextStyle(fontSize: 18),
             ),
-            SizedBox(height: 10),
-            Text(
+            const SizedBox(height: 10),
+            const Text(
               'Job Posting Date:',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 5),
+            const SizedBox(height: 5),
             Text(
-              jobData.jobPostingDate,
-              style: TextStyle(fontSize: 18),
+              widget.jobData.jobPostingDate,
+              style: const TextStyle(fontSize: 18),
             ),
-            SizedBox(height: 10),
-            if (jobData.jobImage != null)
-              Image.asset(
-                jobData.jobImage!,
+            const SizedBox(height: 10),
+
+              Image.network(
+                widget.jobData.jobImage!,
                 width: 300,
                 height: 300,
                 fit: BoxFit.cover,
               ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
                 // Add your action when the user applies for the job

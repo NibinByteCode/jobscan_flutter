@@ -3,6 +3,7 @@ import 'package:jobscan/pages/candidate_page.dart';
 import 'package:jobscan/pages/home_page.dart';
 import 'package:jobscan/pages/jobs_page.dart';
 import 'package:jobscan/pages/login.dart';
+import 'package:jobscan/pages/post_page.dart';
 import 'package:jobscan/pages/profile_page.dart';
 import 'package:jobscan/pages/signup.dart';
 import 'package:jobscan/pages/splash_screen.dart';
@@ -54,11 +55,12 @@ class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
 
   static final List<Widget> _widgetOptions = <Widget>[
-    const HomePage(),
-    const JobsPage(),
-    CandidatePage(),
-    const ProfilePage(),
-  ];
+  const HomePage(),
+  const JobsPage(),
+  PostPage(),
+  const CandidatePage(),
+  const ProfilePage(),
+ ];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -75,29 +77,34 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home,color: Colors.blue,),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.work,color: Colors.blue,),
-            label: 'Jobs',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.contacts,color: Colors.blue,),
-            label: 'Connections',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person,color: Colors.blue,),
-            label: 'Profile',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.blue,
-        onTap: _onItemTapped,
-      ),
+
+    bottomNavigationBar: BottomNavigationBar(
+    items: const <BottomNavigationBarItem>[
+    BottomNavigationBarItem(
+    icon: Icon(Icons.home,color: Colors.blue,),
+    label: 'Home',
+    ),
+    BottomNavigationBarItem(
+    icon: Icon(Icons.work,color: Colors.blue,),
+    label: 'Jobs',
+    ),
+    BottomNavigationBarItem(
+    icon: Icon(Icons.edit,color: Colors.blue,),
+    label: 'Create',
+    ),
+    BottomNavigationBarItem(
+    icon: Icon(Icons.contacts,color: Colors.blue,),
+    label: 'Connections',
+    ),
+    BottomNavigationBarItem(
+    icon: Icon(Icons.person,color: Colors.blue,),
+    label: 'Profile',
+    ),
+    ],
+    currentIndex: _selectedIndex,
+    selectedItemColor: Colors.blue,
+    onTap: _onItemTapped,
+    ),
     );
   }
 }
